@@ -19,12 +19,12 @@ router.post('/popcorn', popcorn_controller.popcorn_create_post);
 router.delete('/popcorn/:id', popcorn_controller.popcorn_delete); 
  
 // PUT request to update popcorn. 
-router.put('/costumes/:id', popcorn_controller.popcorn_update_put); 
+router.put('/popcorn/:id', popcorn_controller.popcorn_update_put); 
  
 // GET request for one popcorn. 
-router.get('/costumes/:id', popcorn_controller.popcorn_detail); 
+router.get('/popcorn/:id', popcorn_controller.popcorn_detail); 
  
 // GET request for list of all popcorn items. 
-router.get('/costumes', popcorn_controller.popcorn_list); 
+router.get('/popcorn', popcorn_controller.popcorn_list); 
  
 module.exports = router;
