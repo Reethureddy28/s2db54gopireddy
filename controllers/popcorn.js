@@ -27,7 +27,7 @@ exports.popcorn_detail = function(req, res) {
 // Handle Costume create on POST. 
 exports.popcorn_create_post = async function(req, res) { 
     console.log(req.body) 
-    let document = new Popcorn(); 
+    let document = new popcorn(); 
     // We are looking for a body, since POST does not have query parameters. 
     // Even though bodies can be in many different formats, we will be picky 
     // and require that it be a json object 
