@@ -4,12 +4,50 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const connectionString = process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString,  
+{useNewUrlParser: true, useUnifiedTopology: true}); 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var popcornRouter = require('./routes/popcorn');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var popcorn = require('./models/popcorn');
+var resourceRouter = require('./routes/resource');
 
+// We can seed the collection if needed on server start
+async function recreateDB(){
+  // Delete everything
+  await popcorn.deleteMany();
+ 
+  let instance1 = new
+ popcorn({popcorn_flavour:"Cheese", popcorn_quantity:10, 
+ popcorn_cost:50});
+  instance1.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("First object saved")
+ });
+ 
+ let instance2 = new
+ popcorn({popcorn_flavour:"Tomato", popcorn_quantity:20, 
+ popcorn_cost:25});
+  instance2.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Second object saved")
+ });
+ 
+  let instance3 = new
+ popcorn({popcorn_flavour:"Salty", popcorn_quantity:30, 
+ popcorn_cost:150});
+  instance3.save( function(err,doc) {
+  if(err) return console.error(err);
+  console.log("Third object saved")
+ });
+ }
+ let reseed = true; 
+if (reseed) { recreateDB();}
 
 var app = express();
 
@@ -28,6 +66,7 @@ app.use('/users', usersRouter);
 app.use('/popcorn', popcornRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter)
 
 
 // catch 404 and forward to error handler
