@@ -2,42 +2,43 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let popcornid = toShow._id 
-  - let popcorn_flavour = toShow.popcorn_flavour 
-  - let popcorn_cost = toShow.popcorn_cost 
-  - let popcorn_quantity = toShow.popcorn_quantity 
+    if(toShow == null)
+       h2 No instance to view update 
+    else
+        - let popcornid = toShow._id 
+        - let popcorn_flavour = toShow.popcorn_flavour 
+        - let popcorn_cost = toShow.popcorn_cost 
+        - let popcorn_quantity = toShow.popcorn_quantity 
    
-  div.row(class='mb-2') 
-    div.mr-1 ID is 
-    div #{popcornid} 
-  - let actionid = "/resource/popcorn/" + popcornid 
-  form(id='popcornForm', action= actionid, method="PUT") 
-    div.form-group 
-        label.popcornAttr(for='popcorn_flavour') popcorn flavour 
-        input#popcorn_flavour(type='text', name='popcorn_flavour', value= popcorn_flavour ) 
-    div.form-group 
-        label.popcornAttr(for='popcorn_quantity') popcorn quantity 
-        input#popcorn_quanity(type='number', name='popcorn_quantity', value= popcorn_quantity ) 
-    div.form-group 
-        label.popcornAttr(for='cost') popcorn cost 
-        input#popcorn_cost(type='number', name='popcorn_cost', value= popcorn_cost ) 
-    input(type="submit") 
- 
-  script. 
-    document.forms['popcornForm'].addEventListener('submit', (event) => { 
-      event.preventDefault(); 
-      // TODO do something here to show user that form is being submitted 
-      fetch(event.target.action, { 
-        method: 'PUT', 
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
-      }).then((resp) => { 
-        return resp.json(); // or resp.text() or whatever the server sends 
-      }).then((body) => { 
-        alert("Update succeded") 
-        // TODO handle body 
-      }).catch((error) => { 
-        // TODO handle error 
-        alert("Update failed " + error ) 
-      }); 
-    }); 
+        div.row(class='mb-2') 
+            div.mr-1 ID is 
+            div #{popcornid} 
+            - let actionid = "/resource/popcorn/" + popcornid 
+        form(id='popcornForm', action= actionid, method="PUT") 
+            div.form-group 
+            label.popcornAttr(for='popcorn_flavour') popcorn flavour 
+            input#popcorn_flavour(type='text', name='popcorn_flavour', value= popcorn_flavour ) 
+            div.form-group 
+            label.popcornAttr(for='popcorn_quantity') popcorn quantity 
+            input#popcorn_quanity(type='number', name='popcorn_quantity', value= popcorn_quantity ) 
+            div.form-group 
+            label.popcornAttr(for='cost') popcorn cost 
+            input#popcorn_cost(type='number', name='popcorn_cost', value= popcorn_cost ) 
+            input(type="submit") 
+        script. 
+            document.forms['popcornForm'].addEventListener('submit', (event) => { 
+            event.preventDefault(); 
+                // TODO do something here to show user that form is being submitted 
+                fetch(event.target.action, { 
+                method: 'PUT', 
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+                }).then((resp) => { 
+                return resp.json(); // or resp.text() or whatever the server sends 
+                }).then((body) => { 
+                alert("Update succeded") 
+                // TODO handle body 
+                }).catch((error) => { 
+                // TODO handle error 
+                alert("Update failed " + error ) 
+                }); 
+                }); 
