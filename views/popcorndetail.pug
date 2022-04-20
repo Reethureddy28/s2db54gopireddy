@@ -1,0 +1,23 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let popcornid = toShow._id 
+  - let popcorn_flavour = toShow.popcorn_flavour 
+  - let popcorn_cost = toShow.popcorn_cost 
+  - let popcorn_quantity = toShow.popcorn_quantity 
+  div 
+    div.row 
+      div(class='popcornAttr mr-3') Popcorn ID is: 
+      div #{popcornid} 
+    div.row 
+      div(class='popcornAttr mr-3') Popcorn Flavour Type is: 
+      div #{popcorn_flavour} 
+    div.row 
+      div(class='popcornAttr mr-3') Popcorn Quantity is: 
+      div #{popcorn_quantity} 
+    div.row 
+      div(class='popcornAttr mr-3') Popcorn Cost is: 
+      div #{popcorn_cost} 
+ 

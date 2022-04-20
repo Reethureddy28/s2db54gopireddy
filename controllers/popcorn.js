@@ -44,7 +44,7 @@ exports.popcorn_create_post = async function(req, res) {
     document.popcorn_cost = req.body.popcorn_cost; 
     try{ 
         let result = await document.save(); 
-        res.send(result); 
+        res.send(result);
     } 
     catch(err){ 
         res.status(500); 
@@ -52,10 +52,20 @@ exports.popcorn_create_post = async function(req, res) {
     }   
 }; 
  
-// Handle popcorn delete form on DELETE. 
-exports.popcorn_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: popcorn delete DELETE ' + req.params.id); 
+
+// Handle popcorn delete on DELETE. 
+exports.popcorn_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await popcorn.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
 }; 
+ 
  
 // Handle popcorn update form on PUT. 
 exports.popcorn_update_put = async function(req, res) { 
@@ -90,3 +100,18 @@ exports.popcorn_view_all_Page = async function(req, res) {
         res.send(`{"error": ${err}}`); 
     }   
 }; 
+
+// Handle a show one view with id specified by query 
+exports.popcorn_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await popcorn.findById( req.query.id) 
+        res.render('popcorndetail',  
+{ title: 'popcorn Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+ 
