@@ -8,7 +8,16 @@ a {
 }
 
 .popcornAttr { 
-  background-color: aquamarine; 
+  background-color: rgb(203, 191, 204); 
   width: 120px; 
 }
- 
+
+.values{
+  border: outset;
+  width: 100px;
+  background-color: rgb(224, 244, 249);
+  border-color: rgb(158, 180, 211);
+  margin-top: 20px;
+  margin-bottom: 12px;
+  font-size: small;
+}

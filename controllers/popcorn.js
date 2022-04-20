@@ -114,4 +114,46 @@ exports.popcorn_view_one_Page = async function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }; 
+
+// Handle building the view for creating a popcorn. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.popcorn_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('popcorncreate', { title: 'popcorn Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle building the view for updating a costume. 
+// query provides the id 
+exports.popcorn_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await popcorn.findById(req.query.id) 
+        res.render('popcornupdate', { title: 'popcorn Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle a delete one view with id from query 
+exports.popcorn_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await popcorn.findById(req.query.id) 
+        res.render('popcorndelete', { title: 'popcorn Delete', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+ 
  
