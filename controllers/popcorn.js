@@ -1,9 +1,6 @@
 var popcorn = require('../models/popcorn'); 
  
-// List of all popcorn
-//exports.popcorn_list = function(req, res) { 
-   // res.send('NOT IMPLEMENTED: popcorn list'); 
-//}; 
+// List of all popcorn 
 exports.popcorn_list = async function(req, res) {
     try{
     thePopcorn = await popcorn.find();
@@ -27,11 +24,8 @@ exports.popcorn_list = async function(req, res) {
         } 
     }; 
  
+ 
 // Handle popcorn create on POST. 
-//exports.popcorn_create_post = function(req, res) { 
-    //res.send('NOT IMPLEMENTED: popcorn create POST'); 
-//}; 
-// Handle Costume create on POST. 
 exports.popcorn_create_post = async function(req, res) { 
     console.log(req.body) 
     let document = new popcorn(); 
